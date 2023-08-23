@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Edit, Message } from '@element-plus/icons-vue'
+
+console.log(import.meta.env)
 </script>
 
 <template>
