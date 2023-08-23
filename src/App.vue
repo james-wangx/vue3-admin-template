@@ -1,22 +1,13 @@
 <script setup lang="ts">
-const str = '我爱祖国'
-console.log(str)
+import { Edit, Message } from '@element-plus/icons-vue'
 </script>
 
 <template>
   <div class="box">
-    <h1>APP 根组件</h1>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="primary" :icon="Edit" circle />
+    <el-button type="info" :icon="Message" circle />
   </div>
 </template>
 
-<style scoped>
-.box {
-  width: 600px;
-  height: 400px;
-  background: black;
-
-  h1 {
-    color: white;
-  }
-}
-</style>
+<style scoped></style>

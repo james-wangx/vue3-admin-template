@@ -1,10 +1,14 @@
 import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+
+import 'element-plus/dist/index.css'
+
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
 
-const fun = () => {
-  console.log('我爱你祖国')
-}
-
-fun()
+app.use(ElementPlus, {
+  locale: zhCn,
+})
+app.mount('#app')
