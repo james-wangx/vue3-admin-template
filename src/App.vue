@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { Edit, Message } from '@element-plus/icons-vue'
-
-console.log(import.meta.env)
+import SvgIcon from '@/components/SvgIcon/index.vue'
 </script>
 
 <template>
-  <div class="box">
-    <el-button type="primary">Primary</el-button>
-    <el-button type="primary" :icon="Edit" circle />
-    <el-button type="info" :icon="Message" circle />
+  <div>
+    <h1>SVG 测试</h1>
+    <svg-icon name="home" color="pink"></svg-icon>
   </div>
 </template>
 
