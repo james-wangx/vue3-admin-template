@@ -2,10 +2,12 @@
 
 <template>
   <div>
-    <h1>SVG 测试</h1>
-    <svg-icon name="home" color="pink"></svg-icon>
-    <pagination></pagination>
+    <h1>测试代码</h1>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+div {
+  color: $base-color;
+}
+</style>

@@ -1,14 +1,13 @@
-import { App } from 'vue'
+import { App, Component } from 'vue'
 
 import SvgIcon from '@/components/SvgIcon/index.vue'
-import Pagination from '@/components/Pagination/index.vue'
 
-const allGlobalComponents = { SvgIcon, Pagination }
+const components: { [propName: string]: Component } = { SvgIcon }
 
 export default {
   install(app: App<Element>) {
-    Object.keys(allGlobalComponents).forEach((e) => {
-      app.component(e, allGlobalComponents[e])
+    Object.keys(components).forEach((key) => {
+      app.component(key, components[key])
     })
   },
 }
