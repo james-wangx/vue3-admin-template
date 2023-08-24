@@ -1,11 +1,11 @@
-import { ConfigEnv, defineConfig, UserConfigExport } from 'vite'
+import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }: ConfigEnv): UserConfigExport => {
+export default defineConfig(() => {
   return {
     plugins: [
       vue(),
@@ -18,7 +18,7 @@ export default defineConfig(({ command }: ConfigEnv): UserConfigExport => {
       viteMockServe({
         // default
         mockPath: 'mock',
-        enable: command === 'serve', // 保证开发阶段可以使用 mock 接口
+        localEnabled: true, // 保证开发阶段可以使用 mock 接口
       }),
     ],
     resolve: {
