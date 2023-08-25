@@ -4,6 +4,7 @@ import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user.ts'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
+import { getTime } from '@/utils/time.ts'
 
 const loginForm = reactive({ username: 'admin', password: '111111' })
 const userStore = useUserStore()
@@ -15,7 +16,11 @@ const login = async function () {
   try {
     await userStore.userLogin(loginForm)
     await router.push('/')
-    ElNotification({ type: 'success', message: '登录成功' })
+    ElNotification({
+      title: `嗨，${getTime()}好`,
+      message: '登录成功',
+      type: 'success',
+    })
   } catch (error) {
     ElNotification({ type: 'error', message: (error as Error).message })
   } finally {
