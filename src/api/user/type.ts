@@ -4,8 +4,8 @@ export interface LoginForm {
 }
 
 interface Data {
-  token: string
-  message: string
+  token?: string
+  message?: string
 }
 
 export interface LoginResponseData {
