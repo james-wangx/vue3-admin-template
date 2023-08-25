@@ -8,10 +8,15 @@ import 'element-plus/dist/index.css'
 import App from '@/App.vue'
 import GlobalComponent from '@/components/index.ts'
 import router from '@/router'
+import pinia from '@/store'
 
 import '@/styles/index.scss'
 
 const app = createApp(App)
 
-app.use(ElementPlus, { locale: zhCn }).use(GlobalComponent).use(router)
+app
+  .use(ElementPlus, { locale: zhCn })
+  .use(GlobalComponent)
+  .use(router)
+  .use(pinia)
 app.mount('#app')

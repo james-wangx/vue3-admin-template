@@ -1,14 +1,33 @@
 <script lang="ts" setup>
-import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { Lock, User } from '@element-plus/icons-vue'
+import { reactive, ref } from 'vue'
+import useUserStore from '@/store/modules/user.ts'
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
 
 const loginForm = reactive({ username: 'admin', password: '111111' })
+const userStore = useUserStore()
+const router = useRouter()
+const loading = ref(false)
+
+const login = async function () {
+  loading.value = true
+  try {
+    await userStore.userLogin(loginForm)
+    await router.push('/')
+    ElNotification({ type: 'success', message: '登录成功' })
+  } catch (error) {
+    ElNotification({ type: 'error', message: (error as Error).message })
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
   <div class="login-container">
     <el-row>
-      <el-col :span="12" :xs="0">占的位子</el-col>
+      <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
         <el-form class="login-form">
           <h1>hello</h1>
@@ -30,7 +49,13 @@ const loginForm = reactive({ username: 'admin', password: '111111' })
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="login-btn" size="default" type="primary">
+            <el-button
+              :loading="loading"
+              class="login-btn"
+              size="default"
+              type="primary"
+              @click="login"
+            >
               登录
             </el-button>
           </el-form-item>
