@@ -1,1 +1,15 @@
 @import '@/styles/reset';
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $base-layout-left-background;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: gray;
+  border-radius: 10px;
+}
