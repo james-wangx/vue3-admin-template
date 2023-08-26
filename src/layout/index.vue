@@ -1,9 +1,27 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Logo from '@/layout/logo/index.vue'
+</script>
 
 <template>
   <div class="layout-container">
     <!-- 左侧菜单 -->
-    <div class="layout-left">左侧菜单</div>
+    <div class="layout-left">
+      <logo />
+      <el-scrollbar class="scrollbar">
+        <el-menu background-color="#001529" text-color="white">
+          <el-menu-item index="1">首页</el-menu-item>
+          <el-menu-item index="2">数据大屏</el-menu-item>
+          <el-sub-menu index="3">
+            <template #title>
+              <span>权限管理</span>
+            </template>
+            <el-menu-item index="3-1">用户管理</el-menu-item>
+            <el-menu-item index="3-2">角色管理</el-menu-item>
+            <el-menu-item index="3-3">菜单管理</el-menu-item>
+          </el-sub-menu>
+        </el-menu>
+      </el-scrollbar>
+    </div>
     <!-- 顶部导航 -->
     <div class="layout-top">顶部导航</div>
     <!-- 内容区域 -->
@@ -22,6 +40,11 @@
     width: $base-layout-left-width;
     height: 100vh;
     background: $base-layout-left-background;
+
+    .scrollbar {
+      width: 100%;
+      height: calc(100vh - $base-logo-height);
+    }
   }
 
   .layout-top {
