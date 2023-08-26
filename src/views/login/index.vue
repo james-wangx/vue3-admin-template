@@ -3,15 +3,60 @@ import { Lock, User } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user.ts'
 import { useRouter } from 'vue-router'
-import { ElNotification } from 'element-plus'
+import { ElNotification, FormInstance, FormRules } from 'element-plus'
 import { getTime } from '@/utils/time.ts'
 
-const loginForm = reactive({ username: 'admin', password: '111111' })
+interface LoginForm {
+  username: string
+  password: string
+}
+
 const userStore = useUserStore()
 const router = useRouter()
 const loading = ref(false)
+const loginFormRef = ref<FormInstance>()
+const loginForm = reactive<LoginForm>({ username: 'admin', password: '111111' })
 
-const login = async function () {
+const validateUsername = (rule: any, value: any, callback: any) => {
+  if (value.length >= 5) {
+    callback()
+  } else {
+    callback(new Error('账号长度至少为 5 位'))
+  }
+}
+const validatePassword = (rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
+    callback()
+  } else {
+    callback(new Error('账号长度至少为 6 位'))
+  }
+}
+
+const loginRules = reactive<FormRules<LoginForm>>({
+  // username: [
+  //   {
+  //     required: true,
+  //     min: 6,
+  //     max: 10,
+  //     message: '账号长度应为 6 到 10 位',
+  //     trigger: 'change',
+  //   },
+  // ],
+  // password: [
+  //   {
+  //     required: true,
+  //     min: 6,
+  //     max: 15,
+  //     message: '密码长度应为 6 到 15 位',
+  //     trigger: 'change',
+  //   },
+  // ],
+  username: [{ validator: validateUsername, trigger: 'blur' }],
+  password: [{ validator: validatePassword, trigger: 'blur' }],
+})
+
+const login = async () => {
+  await loginFormRef.value?.validate().then(() => {})
   loading.value = true
   try {
     await userStore.userLogin(loginForm)
@@ -34,17 +79,22 @@ const login = async function () {
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login-form">
+        <el-form
+          ref="loginFormRef"
+          :model="loginForm"
+          :rules="loginRules"
+          class="login-form"
+        >
           <h1>hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               v-model="loginForm.username"
               :prefix-icon="User"
               placeholder="用户名"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               v-model="loginForm.password"
               :prefix-icon="Lock"
