@@ -25,14 +25,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
         meta: {
           title: '首页',
           show: true,
-        },
-      },
-      {
-        path: '/test',
-        component: import('@/views/home/index.vue'),
-        meta: {
-          title: 'test',
-          show: true,
+          icon: 'House',
         },
       },
     ],

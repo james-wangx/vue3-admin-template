@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 defineProps(['routes'])
+
+const goRoute = (vc) => {
+  console.log(vc)
+}
 </script>
 
 <script lang="ts">
@@ -11,9 +15,15 @@ export default {
 <template>
   <template v-for="route in routes" :key="route.path">
     <!-- 没有子路由 -->
-    <el-menu-item v-if="!route.children && route.meta.show" :index="route.path">
+    <el-menu-item
+      v-if="!route.children && route.meta.show"
+      :index="route.path"
+      @click="goRoute"
+    >
       <template #title>
-        <span>标&nbsp;</span>
+        <el-icon>
+          <component :is="route.meta.icon"></component>
+        </el-icon>
         <span>{{ route.meta.title }}</span>
       </template>
     </el-menu-item>
@@ -25,9 +35,12 @@ export default {
         route.children[0].meta.show
       "
       :index="route.children[0].path"
+      @click="goRoute"
     >
       <template #title>
-        <span>标&nbsp;</span>
+        <el-icon>
+          <component :is="route.children[0].meta.icon"></component>
+        </el-icon>
         <span>{{ route.children[0].meta.title }}</span>
       </template>
     </el-menu-item>
@@ -37,7 +50,9 @@ export default {
       :index="route.path"
     >
       <template #title>
-        <span>标&nbsp;</span>
+        <el-icon>
+          <component :is="route.meta.icon"></component>
+        </el-icon>
         <span>{{ route.meta.title }}</span>
       </template>
       <!-- 递归 -->
