@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Logo from '@/layout/logo/index.vue'
 import LayoutMenu from '@/layout/menu/index.vue'
+import LayoutMain from '@/layout/main/index.vue'
 import useUserStore from '@/store/modules/user.ts'
 
 const userStore = useUserStore()
@@ -21,7 +22,7 @@ const userStore = useUserStore()
     <div class="layout-top">顶部导航</div>
     <!-- 内容区域 -->
     <div class="layout-main">
-      <p style="height: 10000px; background: #d77272"></p>
+      <LayoutMain />
     </div>
   </div>
 </template>

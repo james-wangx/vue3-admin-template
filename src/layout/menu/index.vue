@@ -1,8 +1,12 @@
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
+
 defineProps(['routes'])
 
-const goRoute = (vc) => {
-  console.log(vc)
+const router = useRouter()
+
+const goRoute = (vc: any) => {
+  router.push(vc.index)
 }
 </script>
 
