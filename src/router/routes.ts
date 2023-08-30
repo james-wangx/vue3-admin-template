@@ -14,6 +14,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
     path: '/',
     component: () => import('@/layout/index.vue'),
     name: 'layout',
+    redirect: '/home',
     meta: {
       title: 'layout',
       show: true,
@@ -21,7 +22,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
     children: [
       {
         path: '/home',
-        component: import('@/views/home/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         meta: {
           title: '首页',
           show: true,
