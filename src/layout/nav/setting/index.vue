@@ -9,8 +9,25 @@ import useSettingStore from '@/store/modules/setting.ts'
 
 const settingStore = useSettingStore()
 
+/**
+ * 刷新页面
+ */
 const flash = () => {
   settingStore.flash = !settingStore.flash
+}
+
+/**
+ * 全屏切换
+ */
+const fullscreen = () => {
+  // DOM 对象的一个属性，可以用来判断当前是否全屏
+  const full = document.fullscreenElement
+
+  if (full) {
+    document.exitFullscreen()
+  } else {
+    document.documentElement.requestFullscreen()
+  }
 }
 </script>
 
@@ -22,7 +39,12 @@ export default {
 
 <template>
   <el-button :icon="Refresh" circle size="small" @click="flash"></el-button>
-  <el-button :icon="FullScreen" circle size="small"></el-button>
+  <el-button
+    :icon="FullScreen"
+    circle
+    size="small"
+    @click="fullscreen"
+  ></el-button>
   <el-button :icon="Setting" circle size="small"></el-button>
   <img
     alt=""
