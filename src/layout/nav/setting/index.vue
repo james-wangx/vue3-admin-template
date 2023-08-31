@@ -5,6 +5,13 @@ import {
   Refresh,
   Setting,
 } from '@element-plus/icons-vue'
+import useSettingStore from '@/store/modules/setting.ts'
+
+const settingStore = useSettingStore()
+
+const flash = () => {
+  settingStore.flash = !settingStore.flash
+}
 </script>
 
 <script lang="ts">
@@ -14,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <el-button :icon="Refresh" circle size="small"></el-button>
+  <el-button :icon="Refresh" circle size="small" @click="flash"></el-button>
   <el-button :icon="FullScreen" circle size="small"></el-button>
   <el-button :icon="Setting" circle size="small"></el-button>
   <img

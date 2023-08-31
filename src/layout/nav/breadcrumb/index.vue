@@ -7,7 +7,7 @@ const settingStore = useSettingStore()
 const route = useRoute()
 
 const changeIcon = () => {
-  settingStore.changeFold()
+  settingStore.fold = !settingStore.fold
 }
 </script>
 

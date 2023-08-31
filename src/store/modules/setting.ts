@@ -5,13 +5,8 @@ const useSettingStore = defineStore('SettingStore', {
   state: (): SettingState => {
     return {
       fold: false, // 控制菜单折叠还是收起
+      flash: false,
     }
-  },
-
-  actions: {
-    changeFold() {
-      this.fold = !this.fold
-    },
   },
 })
 

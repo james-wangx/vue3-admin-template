@@ -7,4 +7,5 @@ export interface UserState {
 
 export interface SettingState {
   fold: boolean
+  flash: boolean
 }
