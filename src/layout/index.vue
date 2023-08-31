@@ -2,9 +2,14 @@
 import Logo from '@/layout/logo/index.vue'
 import LayoutMenu from '@/layout/menu/index.vue'
 import LayoutMain from '@/layout/main/index.vue'
+import LayoutNav from '@/layout/nav/index.vue'
 import useUserStore from '@/store/modules/user.ts'
+import { useRoute } from 'vue-router'
 
 const userStore = useUserStore()
+const route = useRoute()
+
+console.log(route.path)
 </script>
 
 <template>
@@ -13,13 +18,20 @@ const userStore = useUserStore()
     <div class="layout-left">
       <Logo />
       <el-scrollbar class="scrollbar">
-        <el-menu background-color="#001529" text-color="white">
+        <el-menu
+          active-text-color="yellowgreen"
+          background-color="#001529"
+          :default-active="route.path"
+          text-color="white"
+        >
           <LayoutMenu :routes="userStore.routes" />
         </el-menu>
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout-top">顶部导航</div>
+    <div class="layout-nav">
+      <LayoutNav />
+    </div>
     <!-- 内容区域 -->
     <div class="layout-main">
       <LayoutMain />
@@ -47,22 +59,22 @@ const userStore = useUserStore()
     }
   }
 
-  .layout-top {
+  .layout-nav {
     position: fixed;
     top: 0;
     left: $base-layout-left-width;
     width: calc(100% - $base-layout-left-width);
-    height: $base-layout-top-height;
-    background: $base-layout-top-background;
+    height: $base-layout-nav-height;
+    background: $base-layout-nav-background;
   }
 
   .layout-main {
     position: absolute;
-    top: $base-layout-top-height;
+    top: $base-layout-nav-height;
     left: $base-layout-left-width;
     overflow: auto;
     width: calc(100% - $base-layout-left-width);
-    height: calc(100vh - $base-layout-top-height);
+    height: calc(100vh - $base-layout-nav-height);
     padding: 20px;
     background: $base-layout-main-background;
   }

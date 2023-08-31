@@ -24,10 +24,10 @@ export default {
       :index="route.path"
       @click="goRoute"
     >
+      <el-icon>
+        <component :is="route.meta.icon"></component>
+      </el-icon>
       <template #title>
-        <el-icon>
-          <component :is="route.meta.icon"></component>
-        </el-icon>
         <span>{{ route.meta.title }}</span>
       </template>
     </el-menu-item>
@@ -41,10 +41,10 @@ export default {
       :index="route.children[0].path"
       @click="goRoute"
     >
+      <el-icon>
+        <component :is="route.children[0].meta.icon"></component>
+      </el-icon>
       <template #title>
-        <el-icon>
-          <component :is="route.children[0].meta.icon"></component>
-        </el-icon>
         <span>{{ route.children[0].meta.title }}</span>
       </template>
     </el-menu-item>
