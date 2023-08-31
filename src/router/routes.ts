@@ -12,7 +12,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
     component: () => import('@/layout/index.vue'),
     name: 'layout',
     redirect: '/home',
-    meta: { title: 'layout', show: true },
+    meta: { show: true },
     children: [
       {
         path: '/home',
@@ -38,6 +38,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
     component: () => import('@/layout/index.vue'),
     name: 'Acl',
     meta: { title: '权限管理', icon: 'Lock', show: true },
+    redirect: '/acl/user',
     children: [
       {
         path: '/acl/user',
@@ -64,6 +65,7 @@ export const routes: Readonly<RouteRecordRaw[]> = [
     component: () => import('@/layout/index.vue'),
     name: 'Product',
     meta: { title: '商品管理', icon: 'Goods', show: true },
+    redirect: '/product/trademark',
     children: [
       {
         path: '/product/trademark',

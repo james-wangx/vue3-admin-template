@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ArrowRight } from '@element-plus/icons-vue'
 import useSettingStore from '@/store/modules/setting.ts'
+import { useRoute } from 'vue-router'
 
 const settingStore = useSettingStore()
+const route = useRoute()
 
 const changeIcon = () => {
   settingStore.changeFold()
@@ -20,10 +22,17 @@ export default {
     <component :is="settingStore.fold ? 'Expand' : 'Fold'"></component>
   </el-icon>
   <el-breadcrumb :separator-icon="ArrowRight">
-    <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-    <el-breadcrumb-item>promotion management</el-breadcrumb-item>
-    <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-    <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
+    <el-breadcrumb-item
+      v-for="(item, index) in route.matched"
+      :key="index"
+      v-show="item.meta.title"
+      :to="item.path"
+    >
+      <el-icon>
+        <component :is="item.meta.icon"></component>
+      </el-icon>
+      <span>{{ item.meta.title }}</span>
+    </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
