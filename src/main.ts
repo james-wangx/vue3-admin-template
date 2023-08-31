@@ -9,6 +9,7 @@ import App from '@/App.vue'
 import GlobalComponent from '@/components/index.ts'
 import router from '@/router'
 import pinia from '@/store'
+import '@/permission.ts'
 
 import '@/styles/index.scss'
 
