@@ -7,9 +7,12 @@ import {
 } from '@element-plus/icons-vue'
 import useSettingStore from '@/store/modules/setting.ts'
 import useUserStore from '@/store/modules/user.ts'
+import { useRoute, useRouter } from 'vue-router'
 
 const userStore = useUserStore()
 const settingStore = useSettingStore()
+const router = useRouter()
+const route = useRoute()
 
 /**
  * 刷新页面
@@ -30,6 +33,11 @@ const fullscreen = () => {
   } else {
     document.documentElement.requestFullscreen()
   }
+}
+
+const logout = () => {
+  userStore.logout()
+  router.push({ path: '/login', query: { redirect: route.path } })
 }
 </script>
 
@@ -63,7 +71,7 @@ export default {
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>

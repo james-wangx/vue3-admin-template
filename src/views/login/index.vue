@@ -2,7 +2,7 @@
 import { Lock, User } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user.ts'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ElNotification, FormInstance, FormRules } from 'element-plus'
 import { getTime } from '@/utils/time.ts'
 
@@ -12,6 +12,7 @@ interface LoginForm {
 }
 
 const userStore = useUserStore()
+const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
 const loginFormRef = ref<FormInstance>()
@@ -59,8 +60,13 @@ const login = async () => {
   await loginFormRef.value?.validate()
   loading.value = true
   try {
-    await userStore.userLogin(loginForm)
-    await router.push('/')
+    await userStore.login(loginForm)
+    const redirect: any = route.query.redirect
+    if (redirect) {
+      await router.push(redirect)
+    } else {
+      await router.push('/')
+    }
     ElNotification({
       title: `嗨，${getTime()}好`,
       message: '登录成功',

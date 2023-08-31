@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import type { LoginForm } from '@/api/user/type.ts'
 import { reqLogin, reqUserInfo } from '@/api/user'
 import type { UserState } from '@/store/modules/types/type.ts'
-import { GET_TOKEN, SET_TOKEN } from '@/utils/token.ts'
+import { DEL_TOKEN, GET_TOKEN, SET_TOKEN } from '@/utils/token.ts'
 import { routes } from '@/router/routes.ts'
 
 const useUserStore = defineStore('User', {
@@ -14,8 +14,9 @@ const useUserStore = defineStore('User', {
       avatar: '',
     }
   },
+
   actions: {
-    async userLogin(data: LoginForm) {
+    async login(data: LoginForm) {
       const result = await reqLogin(data)
 
       if (result.code === 200) {
@@ -35,6 +36,13 @@ const useUserStore = defineStore('User', {
         this.username = result.data.checkUser.username
         this.avatar = result.data.checkUser.avatar
       }
+    },
+
+    async logout() {
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      DEL_TOKEN()
     },
   },
 

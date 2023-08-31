@@ -10,8 +10,6 @@ import useSettingStore from '@/store/modules/setting.ts'
 const userStore = useUserStore()
 const settingStore = useSettingStore()
 const route = useRoute()
-
-console.log(route.path)
 </script>
 
 <script lang="ts">
