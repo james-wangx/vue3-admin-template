@@ -6,7 +6,9 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 import useSettingStore from '@/store/modules/setting.ts'
+import useUserStore from '@/store/modules/user.ts'
 
+const userStore = useUserStore()
 const settingStore = useSettingStore()
 
 /**
@@ -49,12 +51,12 @@ export default {
   <img
     alt=""
     class="nav-avatar"
-    src="/logo.png"
+    :src="userStore.avatar"
     style="width: 24px; height: 24px"
   />
   <el-dropdown>
     <span class="el-dropdown-link">
-      Admin
+      {{ userStore.username }}
       <el-icon class="el-icon--right">
         <ArrowDown />
       </el-icon>
@@ -69,6 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav-avatar {
-  margin-left: 10px;
+  margin: 0 5px 0 10px;
+  border-radius: 50%;
 }
 </style>

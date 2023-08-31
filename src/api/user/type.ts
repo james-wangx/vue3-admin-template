@@ -12,7 +12,6 @@ export interface LoginResponseData {
   code: number
   data: Data
 }
-
 interface User {
   userId: number
   avatar: string
@@ -25,7 +24,11 @@ interface User {
   token: string
 }
 
+interface CheckUser {
+  checkUser: User
+}
+
 export interface UserResponseData {
   code: number
-  data: User
+  data: CheckUser
 }

@@ -1,7 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useUserStore from '@/store/modules/user.ts'
+import { onMounted } from 'vue'
+
+const userStore = useUserStore()
+
+onMounted(() => {
+  userStore.getUserInfo()
+})
+</script>
 
 <template>
-  <h1>我是一级路由展示登录成功的数据</h1>
+  <h1>欢迎 {{ userStore.username }}</h1>
+  <br />
+  <img :src="userStore.avatar" alt="" />
 </template>
 
 <style scoped></style>
