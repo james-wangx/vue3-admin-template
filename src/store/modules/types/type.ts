@@ -4,3 +4,7 @@ export interface UserState {
   token: string | null
   routes: Readonly<RouteRecordRaw[]>
 }
+
+export interface SettingState {
+  fold: boolean
+}

@@ -3,6 +3,12 @@ import Breadcrumb from '@/layout/nav/breadcrumb/index.vue'
 import Setting from '@/layout/nav/setting/index.vue'
 </script>
 
+<script lang="ts">
+export default {
+  name: 'LayoutNav',
+}
+</script>
+
 <template>
   <div class="nav">
     <div class="nav-left">

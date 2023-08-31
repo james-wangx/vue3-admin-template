@@ -2,6 +2,12 @@
 import setting from '@/setting.ts'
 </script>
 
+<script lang="ts">
+export default {
+  name: 'Logo',
+}
+</script>
+
 <template>
   <div class="logo">
     <img alt="" v-if="setting.logoHidden" :src="setting.logo" />
@@ -17,7 +23,7 @@ import setting from '@/setting.ts'
   width: 100%;
   height: $base-logo-height;
   color: white;
-  padding: 20px;
+  padding: 10px;
 
   img {
     width: 40px;

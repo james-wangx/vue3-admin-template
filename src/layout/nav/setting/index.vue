@@ -7,6 +7,12 @@ import {
 } from '@element-plus/icons-vue'
 </script>
 
+<script lang="ts">
+export default {
+  name: 'Setting',
+}
+</script>
+
 <template>
   <el-button :icon="Refresh" circle size="small"></el-button>
   <el-button :icon="FullScreen" circle size="small"></el-button>

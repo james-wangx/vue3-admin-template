@@ -1,5 +1,11 @@
 <script setup lang="ts"></script>
 
+<script lang="ts">
+export default {
+  name: 'LayoutMain',
+}
+</script>
+
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade">

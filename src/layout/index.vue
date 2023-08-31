@@ -5,23 +5,32 @@ import LayoutMain from '@/layout/main/index.vue'
 import LayoutNav from '@/layout/nav/index.vue'
 import useUserStore from '@/store/modules/user.ts'
 import { useRoute } from 'vue-router'
+import useSettingStore from '@/store/modules/setting.ts'
 
 const userStore = useUserStore()
+const settingStore = useSettingStore()
 const route = useRoute()
 
 console.log(route.path)
 </script>
 
+<script lang="ts">
+export default {
+  name: 'Layout',
+}
+</script>
+
 <template>
   <div class="layout-container">
     <!-- 左侧菜单 -->
-    <div class="layout-left">
+    <div :class="{ fold: settingStore.fold }" class="layout-left">
       <Logo />
       <el-scrollbar class="scrollbar">
         <el-menu
+          :collapse="settingStore.fold"
+          :default-active="route.path"
           active-text-color="yellowgreen"
           background-color="#001529"
-          :default-active="route.path"
           text-color="white"
         >
           <LayoutMenu :routes="userStore.routes" />
@@ -29,11 +38,11 @@ console.log(route.path)
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout-nav">
+    <div :class="{ fold: settingStore.fold }" class="layout-nav">
       <LayoutNav />
     </div>
     <!-- 内容区域 -->
-    <div class="layout-main">
+    <div :class="{ fold: settingStore.fold }" class="layout-main">
       <LayoutMain />
     </div>
   </div>
@@ -47,6 +56,7 @@ console.log(route.path)
   .layout-left {
     width: $base-layout-left-width;
     height: 100vh;
+    transition: all 0.3s;
     background: $base-layout-left-background;
 
     .scrollbar {
@@ -57,6 +67,10 @@ console.log(route.path)
         border-right: none;
       }
     }
+
+    &.fold {
+      width: $base-layout-left-width-min;
+    }
   }
 
   .layout-nav {
@@ -65,7 +79,13 @@ console.log(route.path)
     left: $base-layout-left-width;
     width: calc(100% - $base-layout-left-width);
     height: $base-layout-nav-height;
+    transition: all 0.3s;
     background: $base-layout-nav-background;
+
+    &.fold {
+      left: $base-layout-left-width-min;
+      width: calc(100% - $base-layout-left-width-min);
+    }
   }
 
   .layout-main {
@@ -76,7 +96,13 @@ console.log(route.path)
     width: calc(100% - $base-layout-left-width);
     height: calc(100vh - $base-layout-nav-height);
     padding: 20px;
+    transition: all 0.3s;
     background: $base-layout-main-background;
+
+    &.fold {
+      left: $base-layout-left-width-min;
+      width: calc(100% - $base-layout-left-width-min);
+    }
   }
 }
 </style>
