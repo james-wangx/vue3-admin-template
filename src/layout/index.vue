@@ -21,7 +21,7 @@ export default {
 <template>
   <div class="layout-container">
     <!-- 左侧菜单 -->
-    <div :class="{ fold: settingStore.fold }" class="layout-left">
+    <div class="layout-left">
       <Logo />
       <el-scrollbar class="scrollbar">
         <el-menu
@@ -64,10 +64,6 @@ export default {
       .el-menu {
         border-right: none;
       }
-    }
-
-    &.fold {
-      width: $base-layout-left-width-min;
     }
   }
 
