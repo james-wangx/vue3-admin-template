@@ -16,7 +16,10 @@ const route = useRoute()
 const router = useRouter()
 const loading = ref(false)
 const loginFormRef = ref<FormInstance>()
-const loginForm = reactive<LoginForm>({ username: 'admin', password: '111111' })
+const loginForm = reactive<LoginForm>({
+  username: 'admin',
+  password: 'atguigu123',
+})
 
 const validateUsername = (rule: any, value: any, callback: any) => {
   if (value.length >= 5) {

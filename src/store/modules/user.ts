@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import type { LoginForm } from '@/api/user/type.ts'
-import { reqLogin, reqUserInfo } from '@/api/user'
+import { reqLogin, reqLogout, reqUserInfo } from '@/api/user'
 import type { UserState } from '@/store/modules/types/type.ts'
 import { DEL_TOKEN, GET_TOKEN, SET_TOKEN } from '@/utils/token.ts'
 import { routes } from '@/router/routes.ts'
@@ -16,16 +15,16 @@ const useUserStore = defineStore('User', {
   },
 
   actions: {
-    async login(data: LoginForm) {
+    async login(data: any) {
       const result = await reqLogin(data)
 
       if (result.code === 200) {
-        this.token = result.data.token as string
+        this.token = result.data as string
         SET_TOKEN(this.token)
         // 保证当前 async 函数返回一个成功的 Promise
         return 'ok'
       } else {
-        return Promise.reject(new Error(result.data.message))
+        return Promise.reject(new Error(result.message))
       }
     },
 
@@ -33,19 +32,26 @@ const useUserStore = defineStore('User', {
       const result = await reqUserInfo()
 
       if (result.code === 200) {
-        this.username = result.data.checkUser.username
-        this.avatar = result.data.checkUser.avatar
+        this.username = result.data.name
+        this.avatar = result.data.avatar
         return 'ok'
       } else {
-        return Promise.reject('获取用户信息失败')
+        return Promise.reject(new Error(result.message))
       }
     },
 
     async logout() {
-      this.token = ''
-      this.username = ''
-      this.avatar = ''
-      DEL_TOKEN()
+      const result = await reqLogout()
+
+      if (result.code === 200) {
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        DEL_TOKEN()
+        return 'ok'
+      } else {
+        return Promise.reject(new Error(result.message))
+      }
     },
   },
 
