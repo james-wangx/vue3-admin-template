@@ -1,34 +1,28 @@
-export interface LoginForm {
+export interface LoginReqData {
   username: string
   password: string
 }
 
-interface Data {
-  token?: string
-  message?: string
-}
-
-export interface LoginResponseData {
+export interface ResData {
   code: number
-  data: Data
-}
-interface User {
-  userId: number
-  avatar: string
-  username: string
-  password: string
-  desc: string
-  roles: string[]
-  buttons: string[]
-  routes: string[]
-  token: string
+  message: string
+  ok: boolean
 }
 
-interface CheckUser {
-  checkUser: User
+export interface LoginResData extends ResData {
+  data: string
 }
 
-export interface UserResponseData {
-  code: number
-  data: CheckUser
+export interface UserInfoResData extends ResData {
+  data: {
+    routes: string[]
+    buttons: string[]
+    roles: string[]
+    name: string
+    avatar: string
+  }
+}
+
+export interface LogoutResData extends ResData {
+  data: null
 }
