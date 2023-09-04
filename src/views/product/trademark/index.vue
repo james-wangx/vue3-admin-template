@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { reqHasTrademark } from '@/api/product/trademark'
+import { Records } from '@/api/product/trademark/type.ts'
 
 const currentPage = ref<number>(1)
 const pageSize = ref<number>(3)
 const small = ref<boolean>(false)
 const total = ref<number>(0)
 const background = ref<boolean>(true)
-const trademarkArr = ref<any>()
+const trademarkArr = ref<Records>()
 
 const getHasTrademark = async () => {
   const result = await reqHasTrademark(currentPage.value, pageSize.value)
