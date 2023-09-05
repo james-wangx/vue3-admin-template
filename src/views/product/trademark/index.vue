@@ -12,12 +12,16 @@ const trademarkArr = ref<Records>()
 
 const getHasTrademark = async () => {
   const result = await reqHasTrademark(currentPage.value, pageSize.value)
-  console.log(result)
 
   if (result.code === 200) {
     total.value = result.data.total
     trademarkArr.value = result.data.records
   }
+}
+
+const callbackSizeChange = async () => {
+  currentPage.value = 1
+  await getHasTrademark()
 }
 
 onMounted(() => getHasTrademark())
@@ -46,11 +50,13 @@ onMounted(() => getHasTrademark())
     <el-pagination
       v-model:current-page="currentPage"
       v-model:page-size="pageSize"
-      :page-sizes="[10, 20, 30, 40, 50]"
+      :page-sizes="[3, 5, 7, 9]"
       :small="small"
       :background="background"
       layout="sizes, prev, pager, next, jumper, ->, total"
-      :total="1000"
+      :total="total"
+      @current-change="getHasTrademark"
+      @size-change="callbackSizeChange"
     />
   </el-card>
 </template>
